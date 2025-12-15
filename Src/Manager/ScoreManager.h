@@ -63,6 +63,7 @@ private:	//　メンバ変数
 
 	const int BigFont = CreateFontToHandle("Snap ITC", 70, 7, DX_FONTTYPE_ANTIALIASING_EDGE_4X4);
 	const int NomalFont = CreateFontToHandle("Snap ITC", 40, 7, DX_FONTTYPE_ANTIALIASING_EDGE_4X4);
+	const int ScoreFont = CreateFontToHandle("Snap ITC", 55, 7, DX_FONTTYPE_ANTIALIASING_EDGE_4X4);
 
 public:		//　メンバ関数
 	struct Score{

@@ -38,6 +38,7 @@ ScoreManager::ScoreManager()
 ScoreManager::~ScoreManager() {
 	DeleteFontToHandle(NomalFont);
 	DeleteFontToHandle(BigFont);
+	DeleteFontToHandle(ScoreFont);
 }
 
 /*
@@ -143,8 +144,8 @@ void ScoreManager::Render() {
 			score[i].isVisible = false;
 	}
 	//DrawFormatStringToHandle(620, 10, red, NomalFont, "SCORE : %d", TotalScore);
-	DrawFormatStringToHandle((WINDOW_WIDTH - GetDrawStringWidthToHandle("SCORE : ", 8, NomalFont)) / 1.15,
-		WINDOW_HEIGHT / 100, red, NomalFont, "SCORE : %d", TotalScore);
+	DrawFormatStringToHandle((WINDOW_WIDTH - GetDrawStringWidthToHandle("SCORE : ", 8, ScoreFont)) / 1.2,
+		WINDOW_HEIGHT / 40, red, ScoreFont, "SCORE : %d", TotalScore);
 
 	//　ゲームオーバーになったらランキングを表示
 	if (GameManager::GetInstance()->GetGameOverFlag()) {

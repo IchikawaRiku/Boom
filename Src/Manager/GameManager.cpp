@@ -155,6 +155,6 @@ void GameManager::Render() {
 	DrawGraph(WINDOW_WIDTH * 0.05f, WINDOW_HEIGHT * 0.65f, ExitModel, true);
 	
 	for (int i = 0; i < HP; i++)
-		DrawGraph(WINDOW_WIDTH * (0.02f + (i * 0.065f)), WINDOW_HEIGHT * 0.05f, HeartModel, true);
+		DrawGraph(WINDOW_WIDTH * (0.02f + (i * 0.065f)), WINDOW_HEIGHT * 0.025f, HeartModel, true);
 
 }
