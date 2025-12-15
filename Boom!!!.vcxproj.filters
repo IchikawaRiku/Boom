@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Src\GameObject\GameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\main.cpp" />
+    <ClCompile Include="Src\GameObject\Bullet\Bullet.cpp">
+      <Filter>GameObject\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GameObject\Camera\Camera.cpp">
+      <Filter>GameObject\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Manager\InputManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GameObject\Bomb\Bomb.cpp">
+      <Filter>GameObject\Bomb</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Manager\CollisionManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Component\Collider.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Manager\BulletManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Manager\ScoreManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GameObject\Cannon\Cannon.cpp">
+      <Filter>GameObject\Cannon</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GameObject\CannonBase\CannonBase.cpp">
+      <Filter>GameObject\CannonBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Manager\GameManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GameObject\Effect\Effect.cpp">
+      <Filter>GameObject\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Manager\EffectManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Manager\SceneManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Scene\GameScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Scene\TitleScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GameObject\Stage\Stage.cpp">
+      <Filter>GameObject\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Manager\AudioManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GameObject\Audio\Audio.cpp">
+      <Filter>GameObject\Auido</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Manager\BombManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Manager\TimeManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Manager\FadeManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Src\GameObject\GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Definition.h" />
+    <ClInclude Include="Src\GameObject\Bullet\Bullet.h">
+      <Filter>GameObject\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\GameObject\Camera\Camera.h">
+      <Filter>GameObject\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Manager\InputManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\GameObject\Bomb\Bomb.h">
+      <Filter>GameObject\Bomb</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Manager\CollisionManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Component\Collider.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Manager\BulletManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Manager\ScoreManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\GameObject\Cannon\Cannon.h">
+      <Filter>GameObject\Cannon</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\GameObject\CannonBase\CannonBase.h">
+      <Filter>GameObject\CannonBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Manager\GameManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\GameObject\Effect\Effect.h">
+      <Filter>GameObject\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Manager\EffectManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Manager\SceneManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Scene\GameScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Scene\BaseScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Scene\TitleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\GameObject\Stage\Stage.h">
+      <Filter>GameObject\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Manager\AudioManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\GameObject\Auido\Audio.h">
+      <Filter>GameObject\Auido</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Manager\BombManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Manager\TimeManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Manager\FadeManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{4bbbafe8-90e6-467a-ae1a-9e4073eb2f6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Bullet">
+      <UniqueIdentifier>{6b433c45-c893-4f01-950d-31d9530c364e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Camera">
+      <UniqueIdentifier>{fb35cc7b-74f3-4729-894b-684d5fb92cd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{a0cd687b-be21-4cd6-af2f-ae226b4d6db8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Bomb">
+      <UniqueIdentifier>{61212be1-0970-4c16-be83-370415da3891}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{020d9949-ba90-44f3-9ddd-65e4d164e4e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Cannon">
+      <UniqueIdentifier>{eb4ef53a-3d5b-4a06-b2c3-7eaed4ec383b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\CannonBase">
+      <UniqueIdentifier>{fd9fc655-d021-4b08-965c-799985c06e6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Effect">
+      <UniqueIdentifier>{aab65e27-a69c-4fa5-b5d8-eb69b5656986}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{a1c9838a-c6ae-4efd-b70d-c8333832fc8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Stage">
+      <UniqueIdentifier>{c2c24d42-2877-4bc9-83ed-00a032cbfe37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Auido">
+      <UniqueIdentifier>{2afc89bd-6794-44cd-ae2d-a69251e79762}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc" />
+  </ItemGroup>
+</Project>
