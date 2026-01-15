@@ -58,6 +58,11 @@ private:	//　メンバ変数
 	bool prevMouseButtonL;
 	bool currentMouseButtonL;
 
+	int mouseX;
+	int mouseY;
+	int mouseDownX;
+	int mouseDownY;
+
 public:		//　メンバ変数
 	/*
 	*   @function   Update
@@ -102,6 +107,89 @@ public:		//  キーボード用入力管理
 		return prevKeyState[_key] && !keyState[_key];
 	}
 
+public:		// マウス用入力管理
+	/*
+	*	@function	IsMouseButtonDown
+	*	@brief		マウスが押されたかどうか
+	*	@return		bool
+	*/
+	inline bool IsMouseButtonDown() const {
+		return !prevMouseButtonL && currentMouseButtonL;
+	}
+
+	/*
+	*	@function	IsMouseButtonDown
+	*	@brief		マウスが押されているどうか
+	*	@return		bool
+	*/
+	inline bool IsMouseButton() const {
+		return currentMouseButtonL;
+	}
+
+	/*
+	*	@function	IsMouseButtonDown
+	*	@brief		マウスが離されたかどうか
+	*	@return		bool
+	*/
+	inline bool IsMouseButtonUp() const {
+		return prevMouseButtonL && !currentMouseButtonL;
+	}
+
+	/*
+	*	@function	GetMouseDownX
+	*	@brief		マウスが押された位置X
+	*	@return		bool
+	*/
+	inline int GetMouseDownX() const {
+		return mouseDownX;
+	}
+
+	/*
+	*	@function	GetMouseDownY
+	*	@brief		マウスが押された位置Y
+	*	@return		bool
+	*/
+	inline int GetMouseDownY() const {
+		return mouseDownY;
+	}
+
+	/*
+	*	@function	GetMouseX
+	*	@brief		マウスの位置X
+	*	@return		bool
+	*/
+	inline int GetMouseX() const {
+		return mouseX;
+	}
+
+	/*
+	*	@function	GetMouseY
+	*	@brief		マウスの位置Y
+	*	@return		bool
+	*/
+	inline int GetMouseY() const {
+		return mouseY;
+	}
+
+	/*
+	*	@function	GetMouseMoveValueX
+	*	@brief		マウスが押されてからのXの移動量
+	*	@return		int
+	*/
+	inline int GetMouseMoveValueX() const {
+		return mouseDownX - mouseX;
+	}
+
+	/*
+	*	@function	GetMouseMoveValueY
+	*	@brief		マウスが押されてからのYの移動量
+	*	@return		int
+	*/
+	inline int GetMouseMoveValueY() const {
+		return mouseDownY - mouseY;
+	}
+
+public:
 	inline bool SameVec(VECTOR _Vec1, VECTOR _Vec2) {
 		if (_Vec1.x == _Vec2.x  && _Vec1.y == _Vec2.y && _Vec1.z == _Vec2.z) {
 			return true;
@@ -109,18 +197,6 @@ public:		//  キーボード用入力管理
 		else {
 			return false;
 		}
-	}
-
-	inline bool IsMouseButtonDown() const {
-		return !prevMouseButtonL && currentMouseButtonL;
-	}
-
-	inline bool IsMouseButton() const {
-		return currentMouseButtonL;
-	}
-
-	inline bool IsMouseButtonUp() const {
-		return prevMouseButtonL && !currentMouseButtonL;
 	}
 };
 

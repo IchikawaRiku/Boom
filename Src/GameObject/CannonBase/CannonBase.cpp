@@ -1,5 +1,6 @@
 #include "CannonBase.h"
 #include "../../Manager/BulletManager.h"
+#include "../../Manager/InputManager.h"
 
 /*
 *   @brief	コンストラクタ
@@ -31,10 +32,12 @@ void CannonBase::Start() {
 void CannonBase::Update() {
 	//  弾管理クラスの取得
 	BulletManager* BMana = BulletManager::GetInstance();
+	//  入力管理クラスの取得
+	InputManager* input = InputManager::GetInstance();
 
 	//  角度を弾の方向に合わせる
-	if (BMana->GetMouseButton()) {
-		rotation = VGet(0,(BMana->GetDownMouseX() - BMana->GetMouseX()) / 10, 0);
+	if (!BMana->GetRelease() && input->IsMouseButton()) {
+		rotation = VGet(0,(input->GetMouseMoveValueX()) / 10, 0);
 	}
 	//  弾を放出した後元の角度に戻る
 	if (!BMana->GetRelease()) {

@@ -190,7 +190,7 @@ void TitleScene::Render() {
 			blinking = 0;
 	}
 	else if (blinking > 0.5f &&
-		!(BulletManager::GetInstance()->GetMouseY() - BulletManager::GetInstance()->GetDownMouseY() > 100) && !start) {
+		!(InputManager::GetInstance()->GetMouseMoveValueY() < -100) && !start) {
 		DrawFormatStringToHandle((WINDOW_WIDTH - GetDrawStringWidthToHandle("Down!", 5, BigFont)) / 2,
 			WINDOW_HEIGHT * 0.55, red, BigFont, "Down!");
 		if (blinking > 1)

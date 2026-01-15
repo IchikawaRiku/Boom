@@ -109,20 +109,22 @@ void GameManager::Update() {
 *   @brief		タイトルの更新処理
 */
 void GameManager::TitleUpdate() {
+	//  入力管理クラスの取得
+	InputManager* input = InputManager::GetInstance();
 	//  1秒を繰り返すカウント
 	Count += TimeManager::GetInstance()->GetDeltaTime();
 	if (Count > 0.7f) {
 		Count = 0;
 		ArrowY = 700.0f;
 	}
-	ArrowY = BulletManager::GetInstance()->GetDownMouseY() + Count * 100;
-	ArrowX = BulletManager::GetInstance()->GetDownMouseX() - 75;
+	ArrowY = input->GetMouseDownY() + Count * 100;
+	ArrowX = input->GetMouseDownX() - 75;
 
-	if (InputManager::GetInstance()->IsMouseButtonDown() &&
-		BulletManager::GetInstance()->GetMouseY() > WINDOW_HEIGHT * 0.73f &&
-		BulletManager::GetInstance()->GetMouseY() < WINDOW_HEIGHT * 0.9f &&
-		BulletManager::GetInstance()->GetMouseX() > WINDOW_WIDTH * 0.075f &&
-		BulletManager::GetInstance()->GetMouseX() < WINDOW_WIDTH * 0.16f) {
+	if (input->IsMouseButtonDown() &&
+		input->GetMouseY() > WINDOW_HEIGHT * 0.73f &&
+		input->GetMouseY() < WINDOW_HEIGHT * 0.9f &&
+		input->GetMouseX() > WINDOW_WIDTH * 0.075f &&
+		input->GetMouseX() < WINDOW_WIDTH * 0.16f) {
 		arrow = false;
 		Exit = true;
 	}

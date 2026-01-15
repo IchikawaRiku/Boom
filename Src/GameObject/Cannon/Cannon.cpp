@@ -39,9 +39,9 @@ void Cannon::Update() {
 	InputManager* input = InputManager::GetInstance();
 
 	//  Šp“x‚ð’e‚Ì•ûŒü‚É‡‚í‚¹‚é
-	if (BMana->GetMouseButton()) {
-		rotation = VGet((BMana->GetDownMouseY() - BMana->GetMouseY()) / 10,
-			(BMana->GetDownMouseX() - BMana->GetMouseX()) / 10, 0);
+	if (!BMana->GetRelease() && input->IsMouseButton()) {
+		rotation = VGet((input->GetMouseMoveValueY()) / 10,
+			(input->GetMouseMoveValueX()) / 10, 0);
 	}
 	//  ’e‚ð•úo‚µ‚½ŒãŒ³‚ÌŠp“x‚É–ß‚é
 	if (!BMana->GetRelease()) {

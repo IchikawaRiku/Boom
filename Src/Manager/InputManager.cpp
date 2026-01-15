@@ -14,7 +14,11 @@ InputManager::InputManager()
 	: keyState()
 	, prevKeyState()
 	, prevMouseButtonL(false)
-	, currentMouseButtonL(false){
+	, currentMouseButtonL(false)
+	, mouseX(0.0f)
+	, mouseY(0.0f)
+	, mouseDownX(0.0f)
+	, mouseDownY(0.0f){
 
 }
 
@@ -64,4 +68,16 @@ void InputManager::Update() {
 
 	prevMouseButtonL = currentMouseButtonL;
 	currentMouseButtonL = (GetMouseInput() & MOUSE_INPUT_LEFT);
+
+	// ƒ}ƒEƒX‚ÌˆÚ“®—Ê•Û‘¶
+	GetMousePoint(&mouseX, &mouseY);
+	if (IsMouseButtonDown()) {
+		mouseDownX = mouseX;
+		mouseDownY = mouseY;
+	}
+	else if (IsMouseButtonUp()) {
+		mouseDownX = 0;
+		mouseDownY = 0;
+	}
+
 }

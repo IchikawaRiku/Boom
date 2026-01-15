@@ -57,11 +57,6 @@ private:	//　メンバ変数
 	int bulletModel;				//  弾のモデルの読み込み
 	bool BreakFlag;					//  Break用のフラグ
 	bool Release;					//　弾を放つフラグ
-	int DownMouseX;					//  ボタンを押したときのマウスX座標
-	int DownMouseY;					//  ボタンを押したときのマウスY座標
-	int MouseX;						//  マウスのX座標
-	int MouseY;						//  マウスのY座標
-	bool MouseButton;				//  ボタンを押しているフラグ
 	
 	const int BULLET_MAX;			//  弾の最大数
 	const float COOLTIME_MAX;			//  クールタイムの最大値
@@ -97,6 +92,13 @@ public:		//　メンバ関数
 	*/
 	void Delete();
 
+private:
+	/*
+	 *	@function	GenerateBullet
+	 *	@brief		弾生成
+	 */
+	void GenerateBullet(float CoolTimeMAX);
+
 public:		//  Getter と Setter
 
 	/*
@@ -126,42 +128,6 @@ public:		//  Getter と Setter
 	*   @param[in]	bool _v		初期化する値
 	*/
 	inline void SetRelease(bool _v) { Release = _v; }
-
-	/*
-	*   @function	GetMouseButton
-	*   @brief		ボタンを押しているフラグの取得
-	*   @return		bool
-	*/
-	inline bool GetMouseButton() const { return MouseButton; }
-
-	/*
-	*   @function	GetDownMouseX
-	*   @brief		ボタンを押したときのマウスX座標の取得
-	*   @return		int
-	*/
-	inline int GetDownMouseX() const { return DownMouseX; }
-
-	/*
-	*   @function	GetDownMouseY
-	*   @brief		ボタンを押したときのマウスY座標の取得
-	*   @return		int
-	*/
-	inline int GetDownMouseY() const { return DownMouseY; }
-
-	/*
-	*   @function	GetMouseX
-	*   @brief		マウスX座標の取得
-	*   @return		int
-	*/
-	inline int GetMouseX() const { return MouseX; }
-
-	/*
-	*   @function	GetMouseY
-	*   @brief		マウスY座標の取得
-	*   @return		int
-	*/
-	inline int GetMouseY() const { return MouseY; }
-
 
 };
 
