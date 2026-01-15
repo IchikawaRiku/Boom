@@ -17,8 +17,7 @@ BulletManager* BulletManager::pInstance = nullptr;
 *   @tips		外部で生成されないようにアクセス指定子を private にする
 */
 BulletManager::BulletManager()
-	: Down(false)
-	, CoolTimeFlag(false)
+	: CoolTimeFlag(false)
 	, CoolTime(0)
 	, TitleCoolTime(0)
 	, TitleDown(false)
@@ -108,7 +107,7 @@ void BulletManager::Update() {
 	InputManager* input = InputManager::GetInstance();
 
 	//  クールタイムが終わったら弾を出す
-	if (CoolTime >= COOLTIME_MAX) {
+	if (CoolTime >= COOLTIME_MAX) {// if (CoolTime >= COOLTIME_MAX) {
 		Release = false;
 		//  弾のVisibleがfalseの弾があればtrueに,なければ弾生成用のフラグをtrueに
 		for (auto pGameObject : pBullet) {
@@ -157,17 +156,12 @@ void BulletManager::Update() {
 		CoolTime = 0.0f;
 	}
 
-	//  マウスが押されたら弾を出す
-	if (input->IsMouseButtonDown()) {
-		Down = true;
-	}
-	if (Down && input->IsMouseButtonUp()) {
+	//  マウスを押し終えたタイミングで弾を出す
+	if (input->IsMouseButtonUp())
 		CoolTimeFlag = true;
-		Down = false;
-	}
 
 	//  クールタイムの更新
-	if (CoolTimeFlag)
+	if (CoolTimeFlag)// if (CoolTimeFlag && !BombManager::GetInstance()->GetGameStart())
 		CoolTime += TimeManager::GetInstance()->GetDeltaTime();
 
 	//  マウスの位置を取得
@@ -175,12 +169,14 @@ void BulletManager::Update() {
 	// マウスのボタンが押されたり離されたりしたかどうかの情報を取得する
 	if (!Release) {
 		if (input->IsMouseButtonDown()) {
+			// GameManager::GetInstance()->SetArrowFlag(true);
 			DownMouseX = MouseX;
 			DownMouseY = MouseY;
 			MouseButton = true;
 		}
 		if (input->IsMouseButtonUp()) {
-			if (MouseButton) {
+			// GameManager::GetInstance()->SetArrowFlag(false);
+			if (MouseButton) {// if (MouseY - DownMouseY > 100) {
 				Release = true;
 				//  エフェクト再生
 				EffectManager::GetInstance()->Instantiate("CoolTime", VGet(0, -100, 0));
@@ -486,14 +482,9 @@ void BulletManager::TitleUpdate() {
 		CoolTime = 0.0f;
 	}
 
-	//  マウスが押されたら弾を出す
-	if (input->IsMouseButtonDown()) {
-		Down = true;
-	}
-	if (Down && input->IsMouseButtonUp()) {
+	//  マウス押し終えたタイミングで弾を出す
+	if (input->IsMouseButtonUp())
 		CoolTimeFlag = true;
-		Down = false;
-	}
 
 	//  クールタイムの更新
 	if (CoolTimeFlag && !BombManager::GetInstance()->GetGameStart())

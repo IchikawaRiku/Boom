@@ -48,7 +48,6 @@ public:		//	静的メンバ変数
 #pragma endregion
 
 private:	//　メンバ変数
-	bool Down;						//　マウス入力用のフラグ
 	bool CoolTimeFlag;				//  クールタイム用のフラグ
 	float CoolTime;					//  弾のクールタイム
 	float TitleCoolTime;			//  タイトル用のクールタイム
@@ -113,20 +112,6 @@ public:		//  Getter と Setter
 	*   @param[in]	bool _v		初期化する値
 	*/
 	inline void SetGenerate(bool _v) { Generate = _v; }
-
-	/*
-	*   @function	GetDown
-	*   @brief		マウス入力用のフラグの取得
-	*   @return		bool
-	*/
-	inline bool GetDown() const { return Down; }
-
-	/*
-	*   @function	SetDown
-	*   @brief		マウス入力用のフラグの変更
-	*   @param[in]	bool _v		初期化する値
-	*/
-	inline void SetDown(bool _v) { Down = _v; }
 
 	/*
 	*   @function	GetRelease
