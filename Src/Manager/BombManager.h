@@ -56,8 +56,21 @@ private:	//　メンバ変数
 	float Time;						//  時間を計測する
 	bool GameStart;					//  ゲームをスタートする変数
 	int bombCount;					//  タイトル画面で破壊されたボムの数
+
 	const int BOMB_MAX;				//  爆弾の最大数
 	const int COOLTIME_MAX;			//  クールタイムの最大値
+	const int TITLE_BOMB;			//	タイトルに用意するボムの数
+	const int START_BOMB;			//	最初に生成されるボムの数
+	const float GENERATE_POS_Y;		//	生成されるY座標
+	const float GENERATE_RAND_X;	//  生成位置のランダム値X
+	const float GENERATE_RAND_Z;	//  生成位置のランダム値Z
+	const float GENERATE_OFFSET_X;	//  生成位置の補正値X
+	const float GENERATE_OFFSET_Z;	//  生成位置の補正値Z
+	const float GENERATE_COOLTIME_MAX;	//	生成クールタイムの最大
+	const VECTOR TITLE_GENERATE_BASE_POS;	// タイトルの爆弾の初期生成位置
+	const VECTOR TITLE_GENERATE_POS_1;		// タイトルに規定値に固定されている位置
+	const VECTOR TITLE_GENERATE_POS_2;		// タイトルに規定値に固定されている位置
+	const VECTOR TITLE_GENERATE_POS_3;		// タイトルに規定値に固定されている位置
 
 	Bomb* pStartBomb[3];
 	std::vector<Bomb*> pBomb;		//  爆弾の管理をする配列

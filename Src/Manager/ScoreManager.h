@@ -61,6 +61,20 @@ private:	//　メンバ変数
 	bool SE;
 	bool scoreRender;		//  スコア表示フラグ
 
+	const int SCORE_VISIBLE_MAX;	//　スコア最大表示数
+	const int SCORE_HOLD_MAX;		//　スコア最大保持数
+	const float SCORE_VISIBLE_COUNT;//　スコア表示カウント
+	const float SCORE_TEXT_POS_X_RATIO;	// スコアの表示位置Xの割合
+	const float SCORE_TEXT_POS_Y_RATIO;	// スコアの表示位置Yの割合
+	const float HIGH_SCORE_TEXT_POS_X_RATIO;	// ハイスコアの表示位置Xの割合
+	const float HIGH_SCORE_TEXT_POS_Y_RATIO;	// ハイスコアの表示位置Yの割合
+	const float HIGH_SCORE_TEXT_INTERVAL;		// ハイスコアの表示間隔
+	// テキスト
+	const TCHAR* SCORE_TEXT;					
+	const TCHAR* SCORE_COUNT_TEXT;
+	const TCHAR* NEW_RECORD_TEXT;
+	const TCHAR* BIN_NAME;
+
 	const int BigFont = CreateFontToHandle("Snap ITC", 70, 7, DX_FONTTYPE_ANTIALIASING_EDGE_4X4);
 	const int NomalFont = CreateFontToHandle("Snap ITC", 40, 7, DX_FONTTYPE_ANTIALIASING_EDGE_4X4);
 	const int ScoreFont = CreateFontToHandle("Snap ITC", 55, 7, DX_FONTTYPE_ANTIALIASING_EDGE_4X4);

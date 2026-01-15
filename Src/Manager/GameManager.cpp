@@ -28,7 +28,26 @@ GameManager::GameManager()
 	, HP(4)
 	, ArrowX(700.0f)
 	, ArrowY(700.0f)
-	, Count(0.0f) {
+	, Count(0.0f) 
+	, INTERVAL_SEC(0.7f)
+	, ARROW_Y_MAX(700.0f)
+	, ARROW_SPEED(100.0f)
+	, ARROW_HALF_SIZE(75)
+	, BUTTON_X_MAX_RATIO(0.16f)
+	, BUTTON_X_MIN_RATIO(0.075f)
+	, BUTTON_Y_MAX_RATIO(0.9f)
+	, BUTTON_Y_MIN_RATIO(0.73f)
+	, HIGH_SCORE_TEXT("HIGH SCORE")
+	, HIGH_SCORE_POS_Y_RATIO(0.7f)
+	, HIGH_SCORE_POS_Y_OFFSET(240)
+	, MOUSE_POS_X_RATIO(0.7f)
+	, MOUSE_POS_Y_RATIO(0.6f)
+	, EXIT_POS_X_RATIO(0.05f)
+	, EXIT_POS_Y_RATIO(0.65f)
+	, HEART_POS_X_RATIO(0.02f)
+	, HEART_POS_Y_RATIO(0.025f)
+	, HEART_POS_INTERVAL(0.065f)
+{
 }
 
 /*
@@ -95,7 +114,7 @@ void GameManager::Update() {
 
 	//  1秒を繰り返すカウント
 	Count += TimeManager::GetInstance()->GetDeltaTime();
-	if (Count > 0.7f) {
+	if (Count > INTERVAL_SEC) {
 		Count = 0;
 		if (mouse)
 			mouse = false;
@@ -113,18 +132,18 @@ void GameManager::TitleUpdate() {
 	InputManager* input = InputManager::GetInstance();
 	//  1秒を繰り返すカウント
 	Count += TimeManager::GetInstance()->GetDeltaTime();
-	if (Count > 0.7f) {
+	if (Count > INTERVAL_SEC) {
 		Count = 0;
-		ArrowY = 700.0f;
+		ArrowY = ARROW_Y_MAX;
 	}
-	ArrowY = input->GetMouseDownY() + Count * 100;
-	ArrowX = input->GetMouseDownX() - 75;
+	ArrowY = input->GetMouseDownY() + Count * ARROW_SPEED;
+	ArrowX = input->GetMouseDownX() - ARROW_HALF_SIZE;
 
 	if (input->IsMouseButtonDown() &&
-		input->GetMouseY() > WINDOW_HEIGHT * 0.73f &&
-		input->GetMouseY() < WINDOW_HEIGHT * 0.9f &&
-		input->GetMouseX() > WINDOW_WIDTH * 0.075f &&
-		input->GetMouseX() < WINDOW_WIDTH * 0.16f) {
+		input->GetMouseY() > WINDOW_HEIGHT * BUTTON_Y_MIN_RATIO &&
+		input->GetMouseY() < WINDOW_HEIGHT * BUTTON_Y_MAX_RATIO &&
+		input->GetMouseX() > WINDOW_WIDTH * BUTTON_X_MIN_RATIO &&
+		input->GetMouseX() < WINDOW_WIDTH * BUTTON_X_MAX_RATIO) {
 		arrow = false;
 		Exit = true;
 	}
@@ -138,15 +157,15 @@ void GameManager::TitleUpdate() {
 void GameManager::Render() {
 	//  ゲームオーバーになったら表示
 	if (GameOverFlag) {
-		DrawFormatStringToHandle((WINDOW_WIDTH - GetDrawStringWidthToHandle("HIGH SCORE", 10, NomalFont)) / 2,
-			WINDOW_HEIGHT * 0.7 - 240, red, NomalFont, "HIGH SCORE");
+		DrawFormatStringToHandle((WINDOW_WIDTH - GetDrawStringWidthToHandle(HIGH_SCORE_TEXT, _tcslen(HIGH_SCORE_TEXT), NomalFont)) / 2,
+			WINDOW_HEIGHT * HIGH_SCORE_POS_Y_RATIO - HIGH_SCORE_POS_Y_OFFSET, red, NomalFont, HIGH_SCORE_TEXT);
 
 		//  全てのUIが表示仕切ったら
 		if (ScoreManager::GetInstance()->GetScoreRender()) {
 			if (mouse)
-				DrawGraph(WINDOW_WIDTH * 0.7f, WINDOW_HEIGHT * 0.6f, MouseModel, true);
+				DrawGraph(WINDOW_WIDTH * MOUSE_POS_X_RATIO, WINDOW_HEIGHT * MOUSE_POS_Y_RATIO, MouseModel, true);
 			else
-				DrawGraph(WINDOW_WIDTH * 0.7f, WINDOW_HEIGHT * 0.6f, MouseLeftModel, true);
+				DrawGraph(WINDOW_WIDTH * MOUSE_POS_X_RATIO, WINDOW_HEIGHT * MOUSE_POS_Y_RATIO, MouseLeftModel, true);
 	}		}
 
 
@@ -154,9 +173,9 @@ void GameManager::Render() {
 		DrawGraph(ArrowX, ArrowY, ArrowModel, true);
 	}
 
-	DrawGraph(WINDOW_WIDTH * 0.05f, WINDOW_HEIGHT * 0.65f, ExitModel, true);
+	DrawGraph(WINDOW_WIDTH * EXIT_POS_X_RATIO, WINDOW_HEIGHT * EXIT_POS_Y_RATIO, ExitModel, true);
 	
 	for (int i = 0; i < HP; i++)
-		DrawGraph(WINDOW_WIDTH * (0.02f + (i * 0.065f)), WINDOW_HEIGHT * 0.025f, HeartModel, true);
+		DrawGraph(WINDOW_WIDTH * (HEART_POS_X_RATIO + (i * HEART_POS_INTERVAL)), WINDOW_HEIGHT * HEART_POS_Y_RATIO, HeartModel, true);
 
 }

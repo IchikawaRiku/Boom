@@ -28,7 +28,18 @@ TitleScene::TitleScene()
 	, countUp(false)
 	, blinking(0.0f)
 	, start(false)
-	, click(false) {
+	, click(false)
+	, CAMERA_POS(VGet(-600.0f, 10.0f, -400.0f))
+	, CAMERA_ROT(VGet(- 12, 30, 0))
+	, TEXT_POS_Y_RATIO(0.55f)
+	, EXIT_TEXT_POS_X_RATIO(0.095f)
+	, EXIT_TEXT_POS_Y_RATIO(0.8f)
+	, BOOM_TEXT("Boom!!!")
+	, PUSH_TEXT("Push!")
+	, DOWN_TEXT("Down!")
+	, RELEASE_TEXT("Release!")
+	, EXIT_TEXT("Exit")
+{
 	Start();
 }
 
@@ -50,12 +61,12 @@ void TitleScene::Start() {
 	GameManager::GetInstance()->SetGameOverFlag(false);
 	SetUseASyncLoadFlag(TRUE);
 	//  モデルの読み込み
-	cannonModel = MV1LoadModel("Res/Model/Cannon.mv1");
-	cannonBaseModel = MV1LoadModel("Res/Model/CannonBase.mv1");
-	stageModel = MV1LoadModel("Res/Model/Stage00.mv1");
-	backGroundModel = MV1LoadModel("Res/Model/Stage00_sky.mv1");
-	arrowModel = LoadGraph("Res/Model/Arrow.png");
-	exitModel = LoadGraph("Res/Model/BombIrasuto.png");
+	cannonModel = MV1LoadModel(CANNON_MODEL_PATH);
+	cannonBaseModel = MV1LoadModel(CANNON_BASE_MODEL_PATH);
+	stageModel = MV1LoadModel(STAGE_MODEL_PATH);
+	backGroundModel = MV1LoadModel(BACK_GROUND_MODEL_PATH);
+	arrowModel = LoadGraph(ARROW_MODEL_PATH);
+	exitModel = LoadGraph(EXIT_MODEL_PATH);
 
 	GameManager::GetInstance()->SetArrowModel(arrowModel);
 	GameManager::GetInstance()->SetExitModel(exitModel);
@@ -63,7 +74,7 @@ void TitleScene::Start() {
 
 
 	//  ステージのインスタンス化
-	Stage* pStage = new Stage(VGet(4000.0f, -380.0f, 3500.0f));
+	Stage* pStage = new Stage(STAGE_POS);
 	//  ステージモデルデータのセット
 	pStage->SetModelHandle(stageModel);
 	//  背景画像のセット
@@ -78,20 +89,20 @@ void TitleScene::Start() {
 	BulletManager::GetInstance()->Start();
 
 	//  カメラのインスタンス化
-	Camera* pCamera = new Camera(VGet(-600.0f, 10.0f, -400.0f));
-	pCamera->SetRotation(-12, 30, 0);
+	Camera* pCamera = new Camera(CAMERA_POS);
+	pCamera->SetRotation(CAMERA_ROT);
 	//  一元管理する配列に追加
 	pGameObjectArray.push_back(pCamera);
 
 	//  大砲のインスタンス化
-	Cannon* pCannon = new Cannon(VGet(0.0f, 0.0f, 0.0f));
+	Cannon* pCannon = new Cannon(VZero);
 	//  大砲のモデルデータのセット
 	pCannon->SetModelHandle(cannonModel);
 	//  一元管理する配列に追加
 	pGameObjectArray.push_back(pCannon);
 
 	//  大砲の土台のインスタンス化
-	CannonBase* pCannonBase = new CannonBase(VGet(0.0f, 0.0f, 0.0f));
+	CannonBase* pCannonBase = new CannonBase(VZero);
 	//  大砲の土台のモデルデータのセット
 	pCannonBase->SetModelHandle(cannonBaseModel);
 	//  一元管理する配列に追加
@@ -100,17 +111,17 @@ void TitleScene::Start() {
 	SetUseASyncLoadFlag(FALSE);
 
 	//  エフェクトの読み込み
-	EffectManager::GetInstance()->Load("Res/Effect/Simple_GeneratingPosition1.efkefc", "Shot", 2.0f);
-	EffectManager::GetInstance()->Load("Res/Effect/Simple_Sprite_BillBoard.efkefc", "Explosion", 50.0f);
+	EffectManager::GetInstance()->Load(SHOT_EFFECT_PATH, SHOT_NAME, SHOT_EFFECT_SCALE);
+	EffectManager::GetInstance()->Load(EXPLOSION_EFFECT_PATH, EXPLOSION_NAME, EXPLOSION_EFFECT_SCALE);
 
 
 	// 音の読み込み
-	AudioManager::GetInstance()->Load("Res/Sound/maou_bgm_fantasy07.mp3", "StartBGM", true);
-	AudioManager::GetInstance()->Load("Res/Sound/maou_se_battle_explosion03.mp3", "Shot", true);
-	AudioManager::GetInstance()->Load("Res/Sound/maou_se_battle_explosion05.mp3", "Explosion", true);
+	AudioManager::GetInstance()->Load(START_BGM_PATH, START_BGM_NAME, true);
+	AudioManager::GetInstance()->Load(SHOT_SE_PATH, SHOT_NAME, true);
+	AudioManager::GetInstance()->Load(EXPLOSION_SE_PATH, EXPLOSION_NAME, true);
 
 	//  BGMの再生
-	AudioManager::GetInstance()->PlayOneShot("StartBGM", 0.7f, true);
+	AudioManager::GetInstance()->PlayOneShot(START_BGM_NAME, START_BGM_VOLUME, true);
 
 }
 
@@ -125,7 +136,7 @@ void TitleScene::Update() {
 		countUp = true;
 		start = true;
 		click = true;
-		AudioManager::GetInstance()->PlayOneShot("OK");
+		AudioManager::GetInstance()->PlayOneShot(OK_NAME);
 	}
 	//  １秒待ってフェード開始
 	if (countUp)
@@ -179,32 +190,32 @@ void TitleScene::Render() {
 	//　エフェクトの描画
 	EffectManager::GetInstance()->Render();
 
-	DrawFormatStringToHandle((WINDOW_WIDTH - GetDrawStringWidthToHandle("Boom!!!", 7, UltoraBigFont)) / 2,
-		WINDOW_HEIGHT / 4, red, UltoraBigFont, "Boom!!!");
+	DrawFormatStringToHandle((WINDOW_WIDTH - GetDrawStringWidthToHandle(BOOM_TEXT, _tcslen(BOOM_TEXT), UltoraBigFont)) / 2,
+		WINDOW_HEIGHT / 4, red, UltoraBigFont, BOOM_TEXT);
 	//  点滅
 	blinking += TimeManager::GetInstance()->GetDeltaTime();
 	if (blinking > 0.5f && !GameManager::GetInstance()->GetArrowFlag() && !start) {
-		DrawFormatStringToHandle((WINDOW_WIDTH - GetDrawStringWidthToHandle("Push!", 5, BigFont)) / 2,
-			WINDOW_HEIGHT * 0.55, red, BigFont, "Push!");
+		DrawFormatStringToHandle((WINDOW_WIDTH - GetDrawStringWidthToHandle(PUSH_TEXT, _tcslen(PUSH_TEXT), BigFont)) / 2,
+			WINDOW_HEIGHT * TEXT_POS_Y_RATIO, red, BigFont, PUSH_TEXT);
 		if (blinking > 1)
 			blinking = 0;
 	}
 	else if (blinking > 0.5f &&
-		!(InputManager::GetInstance()->GetMouseMoveValueY() < -100) && !start) {
-		DrawFormatStringToHandle((WINDOW_WIDTH - GetDrawStringWidthToHandle("Down!", 5, BigFont)) / 2,
-			WINDOW_HEIGHT * 0.55, red, BigFont, "Down!");
+		!(InputManager::GetInstance()->GetMouseMoveValueY() < MOUSE_PUSH_DOWN_MIN) && !start) {
+		DrawFormatStringToHandle((WINDOW_WIDTH - GetDrawStringWidthToHandle(DOWN_TEXT, _tcslen(DOWN_TEXT), BigFont)) / 2,
+			WINDOW_HEIGHT * TEXT_POS_Y_RATIO, red, BigFont, DOWN_TEXT);
 		if (blinking > 1)
 			blinking = 0;
 	}
 	else if (blinking > 0.5f && !start) {
-		DrawFormatStringToHandle((WINDOW_WIDTH - GetDrawStringWidthToHandle("Release!", 8, BigFont)) / 2,
-			WINDOW_HEIGHT * 0.55, red, BigFont, "Release!");
+		DrawFormatStringToHandle((WINDOW_WIDTH - GetDrawStringWidthToHandle(RELEASE_TEXT, _tcslen(RELEASE_TEXT), BigFont)) / 2,
+			WINDOW_HEIGHT * TEXT_POS_Y_RATIO, red, BigFont, RELEASE_TEXT);
 		if (blinking > 1)
 			blinking = 0;
 	}
 	//　ゲーム進行関連の描画
 	GameManager::GetInstance()->Render();
 
-	DrawFormatStringToHandle((WINDOW_WIDTH - GetDrawStringWidthToHandle("Exit", 4, SmallFont)) * 0.095f,
-		WINDOW_HEIGHT * 0.8f, yellow, SmallFont, "Exit");
+	DrawFormatStringToHandle((WINDOW_WIDTH - GetDrawStringWidthToHandle(EXIT_TEXT, _tcslen(EXIT_TEXT), SmallFont)) * EXIT_TEXT_POS_X_RATIO,
+		WINDOW_HEIGHT * EXIT_TEXT_POS_Y_RATIO, yellow, SmallFont, EXIT_TEXT);
 }

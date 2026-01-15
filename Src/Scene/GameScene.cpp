@@ -16,7 +16,8 @@
 /*
 *	@brief	コンストラクタ
 */
-GameScene::GameScene(){
+GameScene::GameScene()
+	: CAMERA_POS(VGet(0.0f, 470.0f, -1000.0f)){
 	Start();
 }
 
@@ -35,33 +36,33 @@ GameScene::~GameScene() {
 */
 void GameScene::Start() {
 	//  モデルの読み込み
-	cannonModel = MV1LoadModel("Res/Model/Cannon.mv1");
-	cannonBaseModel = MV1LoadModel("Res/Model/CannonBase.mv1");
-	stageModel = MV1LoadModel("Res/Model/Stage00.mv1");
-	backGroundModel = MV1LoadModel("Res/Model/Stage00_sky.mv1");
-	mouseModel = LoadGraph("Res/Model/mouse.png");
-	mouseLeftModel = LoadGraph("Res/Model/mouse_left.png");
-	heartModel = LoadGraph("Res/Model/heart.png");
+	cannonModel = MV1LoadModel(CANNON_MODEL_PATH);
+	cannonBaseModel = MV1LoadModel(CANNON_BASE_MODEL_PATH);
+	stageModel = MV1LoadModel(STAGE_MODEL_PATH);
+	backGroundModel = MV1LoadModel(BACK_GROUND_MODEL_PATH);
+	mouseModel = LoadGraph(MOUSE_MODEL_PATH);
+	mouseLeftModel = LoadGraph(MOUSE_LEFT_MODEL_PATH);
+	heartModel = LoadGraph(HEART_MODEL_PATH);
 
 	GameManager::GetInstance()->SetMouseModel(mouseModel);
 	GameManager::GetInstance()->SetMouseLeftModel(mouseLeftModel);
 	GameManager::GetInstance()->SetHeartModel(heartModel);
 	
 	//  エフェクトの読み込み
-	EffectManager::GetInstance()->Load("Res/Effect/Sylph5.efkefc", "CoolTime", 100.0f);
-	EffectManager::GetInstance()->Load("Res/Effect/Simple_GeneratingPosition1.efkefc", "Shot", 2.0f);
-	EffectManager::GetInstance()->Load("Res/Effect/Simple_Sprite_BillBoard.efkefc", "Explosion", 50.0f);
+	EffectManager::GetInstance()->Load(COOL_TIME_EFFECT_PATH, COOL_TIME_NAME, COOL_TIME_EFFECT_SCALE);
+	EffectManager::GetInstance()->Load(SHOT_EFFECT_PATH, SHOT_NAME, SHOT_EFFECT_SCALE);
+	EffectManager::GetInstance()->Load(EXPLOSION_EFFECT_PATH, EXPLOSION_NAME, EXPLOSION_EFFECT_SCALE);
 
 	//  サウンドの読み込み
-	AudioManager::GetInstance()->Load("Res/Sound/maou_se_battle_explosion05.mp3", "Explosion", true);
-	AudioManager::GetInstance()->Load("Res/Sound/maou_se_battle_explosion03.mp3", "Shot", true);
-	AudioManager::GetInstance()->Load("Res/Sound/maou_se_system40.mp3", "Score", true);
-	AudioManager::GetInstance()->Load("Res/Sound/maou_se_onepoint29.mp3", "GameOver", true);
-	AudioManager::GetInstance()->Load("Res/Sound/maou_se_jingle05.mp3", "NewRecord", true);
-	AudioManager::GetInstance()->Load("Res/Sound/maou_bgm_fantasy08.mp3", "GameBGM", true);
+	AudioManager::GetInstance()->Load(EXPLOSION_SE_PATH, EXPLOSION_NAME, true);
+	AudioManager::GetInstance()->Load(SHOT_SE_PATH, SHOT_NAME, true);
+	AudioManager::GetInstance()->Load(SCORE_SE_PATH, SCORE_NAME, true);
+	AudioManager::GetInstance()->Load(GAME_OVER_SE_PATH, GAME_OVER_NAME, true);
+	AudioManager::GetInstance()->Load(NEW_RECORD_SE_PATH, NEW_RECORD_NAME, true);
+	AudioManager::GetInstance()->Load(GAME_BGM_PATH, GAME_BGM_NAME, true);
 
 	//  ステージのインスタンス化
-	Stage* pStage = new Stage(VGet(4000.0f, -380.0f, 3500.0f));
+	Stage* pStage = new Stage(STAGE_POS);
 	//  ステージモデルデータのセット
 	pStage->SetModelHandle(stageModel);
 	//  背景画像のセット
@@ -76,26 +77,26 @@ void GameScene::Start() {
 	BulletManager::GetInstance()->Start();
 
 	//  カメラのインスタンス化
-	Camera* pCamera = new Camera(VGet(0.0f, 470.0f, -1000.0f));
+	Camera* pCamera = new Camera(CAMERA_POS);
 	//  一元管理する配列に追加
 	pGameObjectArray.push_back(pCamera);
 
 	//  大砲のインスタンス化
-	Cannon* pCannon = new Cannon(VGet(0.0f, 0.0f, 0.0f));
+	Cannon* pCannon = new Cannon(VZero);
 	//  大砲のモデルデータのセット
 	pCannon->SetModelHandle(cannonModel);
 	//  一元管理する配列に追加
 	pGameObjectArray.push_back(pCannon);
 
 	//  大砲の土台のインスタンス化
-	CannonBase* pCannonBase = new CannonBase(VGet(0.0f, 0.0f, 0.0f));
+	CannonBase* pCannonBase = new CannonBase(VZero);
 	//  大砲の土台のモデルデータのセット
 	pCannonBase->SetModelHandle(cannonBaseModel);
 	//  一元管理する配列に追加
 	pGameObjectArray.push_back(pCannonBase);
 
 	//  BGMの再生
-	AudioManager::GetInstance()->PlayOneShot("GameBGM", 0.7f, true);
+	AudioManager::GetInstance()->PlayOneShot(GAME_BGM_NAME, GAME_BGM_VOLUME, true);
 
 }
 

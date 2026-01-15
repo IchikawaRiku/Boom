@@ -1,14 +1,77 @@
-﻿  CannonBase.cpp
+﻿  Collider.cpp
+  Audio.cpp
+  Bomb.cpp
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\GameObject\Bomb\Bomb.cpp(41,26): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\GameObject\Bomb\Bomb.cpp(41,62): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\GameObject\Bomb\Bomb.cpp(117,27): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  Bullet.cpp
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\GameObject\Bullet\Bullet.cpp(177,27): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  Camera.cpp
+  CannonBase.cpp
 C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\GameObject\CannonBase\CannonBase.cpp(40,51): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
   Cannon.cpp
 C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\GameObject\Cannon\Cannon.cpp(44,34): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
 C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\GameObject\Cannon\Cannon.cpp(43,49): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+  Effect.cpp
+  GameObject.cpp
   Stage.cpp
+  AudioManager.cpp
+  BombManager.cpp
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\BombManager.cpp(75,19): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\BombManager.cpp(75,55): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\BombManager.cpp(110,19): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\BombManager.cpp(110,55): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  BulletManager.cpp
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\BulletManager.cpp(133,34): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\BulletManager.cpp(132,57): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\BulletManager.cpp(398,34): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\BulletManager.cpp(397,57): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+  CollisionManager.cpp
+  EffectManager.cpp
+  FadeManager.cpp
+  GameManager.cpp
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\GameManager.cpp(121,34): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\GameManager.cpp(142,24): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\GameManager.cpp(147,50): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\GameManager.cpp(147,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\GameManager.cpp(149,50): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\GameManager.cpp(149,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\GameManager.cpp(154,21): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\GameManager.cpp(154,13): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\GameManager.cpp(157,48): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\GameManager.cpp(157,25): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\GameManager.cpp(160,66): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\GameManager.cpp(160,26): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  InputManager.cpp
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\InputManager.cpp(18,10): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\InputManager.cpp(19,10): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\InputManager.cpp(20,14): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\InputManager.cpp(21,14): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+  SceneManager.cpp
+  ScoreManager.cpp
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\ScoreManager.cpp(139,10): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\ScoreManager.cpp(138,10): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\ScoreManager.cpp(147,97): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\ScoreManager.cpp(186,25): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\ScoreManager.cpp(185,99): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+  コードを生成中...
+  コンパイル中...
+  TimeManager.cpp
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\TimeManager.cpp(16,13): warning C4244: '初期化中': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\TimeManager.cpp(77,27): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Manager\TimeManager.cpp(80,9): warning C4244: '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
+  GameScene.cpp
   TitleScene.cpp
-C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Scene\TitleScene.cpp(188,18): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Scene\TitleScene.cpp(195,18): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Scene\TitleScene.cpp(201,18): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Scene\TitleScene.cpp(209,17): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Scene\TitleScene.cpp(208,93): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Scene\TitleScene.cpp(193,88): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Scene\TitleScene.cpp(198,89): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Scene\TitleScene.cpp(199,18): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Scene\TitleScene.cpp(205,89): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Scene\TitleScene.cpp(206,18): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Scene\TitleScene.cpp(211,92): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Scene\TitleScene.cpp(212,18): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Scene\TitleScene.cpp(219,88): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Scene\TitleScene.cpp(220,17): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Programming\Boom\Boom\Boom\Boom\Src\Scene\TitleScene.cpp(219,113): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  main.cpp
   コードを生成中...
 LINK : fatal error LNK1104: ファイル 'DxDrawFunc_vs2015_x64_MTd.lib' を開くことができません。

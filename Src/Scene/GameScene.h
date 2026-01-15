@@ -14,6 +14,8 @@ protected:			//  メンバ変数
 	int mouseLeftModel;			//  マウスの左クリックモデルハンドル
 	int heartModel;				//  ハートのモデルハンドル
 	
+	const VECTOR CAMERA_POS;
+
 public:		//  コンストラクタとデストラクタ
 	/*
 	*	@brief	コンストラクタ

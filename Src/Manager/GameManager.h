@@ -63,6 +63,31 @@ private:	//　メンバ変数
 	int ExitModel;
 	int HeartModel;
 
+	const float INTERVAL_SEC;
+	const float ARROW_Y_MAX;
+	const float ARROW_SPEED;
+	const float ARROW_HALF_SIZE;
+	//  ハイスコアの位置調整
+	const float HIGH_SCORE_POS_Y_RATIO;
+	const float HIGH_SCORE_POS_Y_OFFSET;
+	// ボタンの領域を作るための割合
+	const float BUTTON_X_MAX_RATIO;
+	const float BUTTON_X_MIN_RATIO;
+	const float BUTTON_Y_MAX_RATIO;
+	const float BUTTON_Y_MIN_RATIO;
+	// マウス画像の位置割合
+	const float MOUSE_POS_X_RATIO;
+	const float MOUSE_POS_Y_RATIO;
+	// ゲーム終了ボタンの位置割合
+	const float EXIT_POS_X_RATIO;
+	const float EXIT_POS_Y_RATIO;
+	// ハートの位置割合
+	const float HEART_POS_X_RATIO;
+	const float HEART_POS_Y_RATIO;
+	const float HEART_POS_INTERVAL;
+	//テキスト
+	const TCHAR* HIGH_SCORE_TEXT;
+
 	const int NomalFont = CreateFontToHandle("Snap ITC", 40, 7, DX_FONTTYPE_ANTIALIASING_EDGE_4X4);
 
 public:		//　メンバ変数

@@ -15,6 +15,20 @@ protected:			//  メンバ変数
 	bool start;
 	bool click;
 
+	const float TEXT_POS_Y_RATIO;		// テキストのY座標の割合
+	const float EXIT_TEXT_POS_X_RATIO;	// 終了テキストのX座標の割合
+	const float EXIT_TEXT_POS_Y_RATIO;	// 終了テキストのY座標の割合
+	
+	// 初期座標＆向き
+	const VECTOR CAMERA_POS;
+	const VECTOR CAMERA_ROT;
+	// テキスト
+	const TCHAR* BOOM_TEXT;
+	const TCHAR* PUSH_TEXT;
+	const TCHAR* DOWN_TEXT;
+	const TCHAR* RELEASE_TEXT;
+	const TCHAR* EXIT_TEXT;
+
 	const int UltoraBigFont = CreateFontToHandle("Snap ITC", 150, 7, DX_FONTTYPE_ANTIALIASING);
 	const int BigFont = CreateFontToHandle("Snap ITC", 80, 9, DX_FONTTYPE_ANTIALIASING);
 	const int SmallFont = CreateFontToHandle("Snap ITC", 40, 9, DX_FONTTYPE_ANTIALIASING);

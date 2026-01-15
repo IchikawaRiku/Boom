@@ -35,6 +35,63 @@
 //　地面の判定ライン
 #define BOTTOM			(-100)	
 
+// ステージの座標
+#define STAGE_POS		(VGet(4000.0f, -380.0f, 3500.0f))
+
+// 引っ張りの最低値
+#define MOUSE_PUSH_DOWN_MIN	(-100)
+
+// ショットエフェクトの拡大率
+#define SHOT_EFFECT_SCALE		(2.0f)
+// 爆発エフェクトの拡大率
+#define EXPLOSION_EFFECT_SCALE	(50.0f)
+// クールタイムエフェクトの拡大率
+#define COOL_TIME_EFFECT_SCALE	(100.0f)
+
+// ニューレコードSEの音量
+#define NEW_RECORD_SE_VOLUME	(0.7f)
+// スタートBGMの音量
+#define START_BGM_VOLUME		(0.7f)
+// ゲームBGMの音量
+#define GAME_BGM_VOLUME			(0.7f)
+
+// モデルパス
+#define CANNON_MODEL_PATH		"Res/Model/Cannon.mv1"
+#define CANNON_BASE_MODEL_PATH	"Res/Model/CannonBase.mv1"
+#define BULLET_MODEL_PATH		"Res/Model/Bullet.mv1"
+#define BOMB_MODEL_PATH			"Res/Model/Bomb.mv1"
+#define STAGE_MODEL_PATH		"Res/Model/Stage00.mv1"
+#define BACK_GROUND_MODEL_PATH	"Res/Model/Stage00_sky.mv1"
+#define ARROW_MODEL_PATH		"Res/Model/Arrow.png"
+#define EXIT_MODEL_PATH			"Res/Model/BombIrasuto.png"
+#define MOUSE_MODEL_PATH		"Res/Model/mouse.png"
+#define MOUSE_LEFT_MODEL_PATH	"Res/Model/mouse_left.png"
+#define HEART_MODEL_PATH		"Res/Model/heart.png"
+// エフェクトパス
+#define SHOT_EFFECT_PATH		"Res/Effect/Simple_GeneratingPosition1.efkefc"
+#define EXPLOSION_EFFECT_PATH	"Res/Effect/Simple_Sprite_BillBoard.efkefc"
+#define COOL_TIME_EFFECT_PATH	"Res/Effect/Sylph5.efkefc"
+// サウンドパス
+#define SHOT_SE_PATH			"Res/Sound/maou_se_battle_explosion03.mp3"
+#define EXPLOSION_SE_PATH		"Res/Sound/maou_se_battle_explosion05.mp3"
+#define SCORE_SE_PATH			"Res/Sound/maou_se_system40.mp3"
+#define GAME_OVER_SE_PATH		"Res/Sound/maou_se_onepoint29.mp3"
+#define NEW_RECORD_SE_PATH		"Res/Sound/maou_se_jingle05.mp3"
+#define START_BGM_PATH			"Res/Sound/maou_bgm_fantasy07.mp3"
+#define GAME_BGM_PATH			"Res/Sound/maou_bgm_fantasy08.mp3"
+
+// 名前
+#define SHOT_NAME				"Shot"
+#define EXPLOSION_NAME			"Explosion"
+#define COOL_TIME_NAME			"CoolTIme"
+#define SCORE_NAME				"Score"
+#define GAME_OVER_NAME			"GameOver"
+#define NEW_RECORD_NAME			"NewRecord"
+#define START_BGM_NAME			"StartBGM"
+#define GAME_BGM_NAME			"GameBGM"
+#define OK_NAME					"OK"
+
+
 //	=================================================================
 //		定数を定義する場所
 //	=================================================================

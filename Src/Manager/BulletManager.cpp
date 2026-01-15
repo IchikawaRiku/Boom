@@ -27,7 +27,9 @@ BulletManager::BulletManager()
 	, BreakFlag(false)
 	, BULLET_MAX(10)
 	, COOLTIME_MAX(0.3f)
-	, TITLE_COOLTIME_MAX(2)
+	, TITLE_COOLTIME_MAX(0.5f)
+	, MOUSE_SENSITIVITY(10)
+	, COOL_TIME_EFFECT_POS(VGet(0, -100, 0))
 	, Release(false)
 	, ShotBullet(nullptr){
 }
@@ -80,7 +82,7 @@ void BulletManager::DestroyInstance() {
 */
 void BulletManager::Start() {
 	//  モデルの読み込み
-	bulletModel = MV1LoadModel("Res/Model/Bullet.mv1");
+	bulletModel = MV1LoadModel(BULLET_MODEL_PATH);
 	//　弾を1つインスタンス化
 	pBullet.push_back(new Bullet(MV1DuplicateModel(bulletModel)));
 }
@@ -117,7 +119,7 @@ void BulletManager::Update() {
 		if (input->IsMouseButtonUp()) {
 			Release = true;
 			//  エフェクト再生
-			EffectManager::GetInstance()->Instantiate("CoolTime", VGet(0, -100, 0));
+			EffectManager::GetInstance()->Instantiate(COOL_TIME_NAME, COOL_TIME_EFFECT_POS);
 			CoolTime = 0.0f;
 		}
 	}
@@ -129,8 +131,8 @@ void BulletManager::Update() {
 		}
 	}
 	if (!Release && input->IsMouseButton()) {
-		ShotBullet->SetRotation((input->GetMouseMoveValueY()) / 10,
-			(input->GetMouseMoveValueX()) / 10,
+		ShotBullet->SetRotation((input->GetMouseMoveValueY()) / MOUSE_SENSITIVITY,
+			(input->GetMouseMoveValueX()) / MOUSE_SENSITIVITY,
 			ShotBullet->GetRotation().z);
 	}
 
@@ -145,223 +147,11 @@ void BulletManager::Update() {
 *   @brief		タイトル画面用の更新処理
 */
 void BulletManager::TitleUpdate() {
-#if 0
-	//  入力管理クラスの取得
-	InputManager* input = InputManager::GetInstance();
-
-	MouseButton = true;
-	DownMouseY = 250;
-	MouseY = 500;
-
-	//  クールタイムが終わったら弾を出す
-	//if (CoolTime >= COOLTIME_MAX) {
-	//	Release = false;
-	//	//  弾のVisibleがfalseの弾があればtrueに,なければ弾生成用のフラグをtrueに
-	//	for (auto pGameObject : pBullet) {
-	//		if (!pGameObject->IsVisible()) {
-	//			//　初期位置に弾がセットされていたらスキップ
-	//			for (auto G : pBullet) {
-	//				if (G->IsVisible() && input->SameVec(G->GetPosition(), VZero))
-	//					BreakFlag = true;
-	//			}
-	//			if (BreakFlag) {
-	//				BreakFlag = false;
-	//				break;
-	//			}
-	//			//　弾をfalseからtrueに
-	//			pGameObject->SetVisible(true);
-	//			Generate = false;
-	//			CoolTimeFlag = false;
-	//			CoolTime = 0;
-	//			break;
-	//		}
-	//		//  trueの弾が初期位置じゃなかったら
-	//		else if (!input->SameVec(pGameObject->GetPosition(), VZero)) {
-	//			//　初期位置に弾がセットされていたらスキップ
-	//			for (auto pG : pBullet) {
-	//				if (pG->IsVisible() && input->SameVec(pG->GetPosition(), VZero)) {
-	//					BreakFlag = true;
-	//				}
-	//			}
-	//			if (BreakFlag) {
-	//				BreakFlag = false;
-	//				break;
-	//			}
-	//			//　弾生成フラグをtrue
-	//			Generate = true;
-	//			CoolTimeFlag = false;
-	//			CoolTime = 0;
-	//			break;
-	//		}
-	//	}
-	//}
-
-	//  弾のインスタンス化
-	//if (Generate) {
-	//	pBullet.push_back(new Bullet(MV1DuplicateModel(bulletModel)));
-	//	Generate = false;
-	//	CoolTime = 0.0f;
-	//}
-
-	//  マウスが押されたら弾を出す
-	if (input->IsMouseButtonDown()) {
-		Down = true;
-	}
-	if (Down && input->IsMouseButtonUp()) {
-		//CoolTimeFlag = true;
-		Down = false;
-	}
-
-	//  クールタイムの更新
-	//if (CoolTimeFlag)
-	//	CoolTime += TimeManager::GetInstance()->GetDeltaTime();
-
-	// マウスのボタンが押されたり離されたりしたかどうかの情報を取得する
-	if (!Release) {
-		if (input->IsMouseButtonDown()) {
-			//DownMouseX = MouseX;
-			//DownMouseY = MouseY;
-			MouseButton = true;
-		}
-		if (input->IsMouseButtonUp()) {
-			if (MouseButton) {
-				Release = true;
-			}
-			MouseButton = false;
-			AudioManager::GetInstance()->Stop("All");
-			//CoolTime = 0.0f;
-		}
-	}
-
-	//  初期位置にセットされているか
-	for (auto pGameObject : pBullet) {
-		if (pGameObject->IsVisible() && input->SameVec(pGameObject->GetPosition(), VZero)) {
-			ShotBullet = pGameObject;
-		}
-	}
-	if (MouseButton) {
-		ShotBullet->SetRotation((DownMouseY - MouseY) / 10, 0, ShotBullet->GetRotation().z);
-	}
-
-	//  弾が放たれたらリセット
-	//if (Release) {
-	//	DownMouseX = 0;
-	//	DownMouseY = 0;
-	//	MouseX = 0;
-	//	MouseY = 0;
-	//}
-
-	//  弾の更新
-	for (auto pGameObject : pBullet) {
-		pGameObject->Update();
-	}
-
-	/*
-	//  入力管理クラスの取得
-	InputManager* input = InputManager::GetInstance();
-
-	MouseButton = true;
-	DownMouseY = 500;
-	MouseY = 1000;
-
-	//  クールタイムが終わったら弾を出す
-	if (CoolTime >= TITLE_COOLTIME_MAX) {
-		Release = false;
-		//  弾のVisibleがfalseの弾があればtrueに,なければ弾生成用のフラグをtrueに
-		for (auto pGameObject : pBullet) {
-			if (!pGameObject->IsVisible()) {
-				//　初期位置に弾がセットされていたらスキップ
-				for (auto G : pBullet) {
-					if (G->IsVisible() && input->SameVec(G->GetPosition(), VZero))
-						BreakFlag = true;
-				}
-				if (BreakFlag) {
-					BreakFlag = false;
-					break;
-				}
-				//　弾をfalseからtrueに
-				pGameObject->SetVisible(true);
-				Generate = false;
-				CoolTimeFlag = false;
-				CoolTime = 0;
-				break;
-			}
-			//  trueの弾が初期位置じゃなかったら
-			else if (!input->SameVec(pGameObject->GetPosition(), VZero)) {
-				//　初期位置に弾がセットされていたらスキップ
-				for (auto pG : pBullet) {
-					if (pG->IsVisible() && input->SameVec(pG->GetPosition(), VZero)) {
-						BreakFlag = true;
-					}
-				}
-				if (BreakFlag) {
-					BreakFlag = false;
-					break;
-				}
-				//　弾生成フラグをtrue
-				Generate = true;
-				CoolTimeFlag = false;
-				CoolTime = 0;
-				break;
-			}
-		}
-	}
-
-	//  弾のインスタンス化
-	if (Generate) {
-		pBullet.push_back(new Bullet(MV1DuplicateModel(bulletModel)));
-		Generate = false;
-		CoolTime = 0.0f;
-	}
-
-	//  クールタイムの更新
-	if (CoolTimeFlag)
-		CoolTime += TimeManager::GetInstance()->GetDeltaTime();
-
-	if (!CoolTimeFlag && !Release)
-		TitleCoolTime += TimeManager::GetInstance()->GetDeltaTime();
-
-	if (TitleCoolTime >= TITLE_COOLTIME_MAX)
-		TitleUp = true;
-
-	//  マウスが押されたら弾を出す
-	if (TitleUp)
-		CoolTimeFlag = true;
-
-	// マウスのボタンが押されたり離されたりしたかどうかの情報を取得する
-	if (!Release) {
-		if (TitleUp) {
-			Release = true;
-			MouseButton = true;
-			CoolTime = 0.0f;
-			TitleCoolTime = 0.0f;
-			TitleUp = false;
-		}
-	}
-
-	//  初期位置にセットされているか
-	for (auto pGameObject : pBullet) {
-		if (pGameObject->IsVisible() && input->SameVec(pGameObject->GetPosition(), VZero)) {
-			ShotBullet = pGameObject;
-		}
-	}
-	//  角度変更
-	if (MouseButton) {
-		ShotBullet->SetRotation(-50, 0, ShotBullet->GetRotation().z);
-	}
-
-	//  弾の更新
-	for (auto pGameObject : pBullet) {
-		pGameObject->Update();
-	}
-	*/
-#endif
-
 	//  入力管理クラスの取得
 	InputManager* input = InputManager::GetInstance();
 	
 	// 弾生成
-	GenerateBullet(0.5f);
+	GenerateBullet(TITLE_COOLTIME_MAX);
 
 	//  マウス押し終えたタイミングで弾を出す
 	if (input->IsMouseButtonUp())
@@ -378,10 +168,10 @@ void BulletManager::TitleUpdate() {
 		}
 		if (input->IsMouseButtonUp()) {
 			GameManager::GetInstance()->SetArrowFlag(false);
-			if (input->GetMouseMoveValueY() < -100) {
+			if (input->GetMouseMoveValueY() < MOUSE_PUSH_DOWN_MIN) {
 				Release = true;
 				//  エフェクト再生
-				EffectManager::GetInstance()->Instantiate("CoolTime", VGet(0, -100, 0));
+				EffectManager::GetInstance()->Instantiate(COOL_TIME_NAME, COOL_TIME_EFFECT_POS);
 			}
 			CoolTime = 0.0f;
 		}
@@ -394,8 +184,8 @@ void BulletManager::TitleUpdate() {
 		}
 	}
 	if (!Release && input->IsMouseButton()) {
-		ShotBullet->SetRotation((input->GetMouseMoveValueY()) / 10,
-			(input->GetMouseMoveValueX()) / 10,
+		ShotBullet->SetRotation((input->GetMouseMoveValueY()) / MOUSE_SENSITIVITY,
+			(input->GetMouseMoveValueX()) / MOUSE_SENSITIVITY,
 			ShotBullet->GetRotation().z);
 	}
 
@@ -444,7 +234,7 @@ void BulletManager::GenerateBullet(float CoolTimeMAX) {
 	InputManager* input = InputManager::GetInstance();
 
 	//  クールタイムが終わったら弾を出す
-	if (CoolTime >= CoolTime) {
+	if (CoolTime >= CoolTimeMAX) {
 		Release = false;
 		//  弾のVisibleがfalseの弾があればtrueに,なければ弾生成用のフラグをtrueに
 		for (auto pGameObject : pBullet) {

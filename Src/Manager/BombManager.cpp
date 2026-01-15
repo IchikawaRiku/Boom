@@ -18,11 +18,24 @@ BombManager::BombManager()
 	, CoolTime(0)
 	, Generate(false)
 	, BreakFlag(false)
-	, BOMB_MAX(10)
-	, COOLTIME_MAX(1)
 	, Time(0)
 	, GameStart(false) 
-	, bombCount(0){
+	, bombCount(0)
+	, BOMB_MAX(10)
+	, COOLTIME_MAX(1)
+	, TITLE_BOMB(3)
+	, START_BOMB(5)
+	, GENERATE_POS_Y(2000.0f)
+	, GENERATE_RAND_X(1200.0f)
+	, GENERATE_RAND_Z(1000.0f)
+	, GENERATE_OFFSET_X(600.0f)
+	, GENERATE_OFFSET_Z(600.0f)
+	, GENERATE_COOLTIME_MAX(15)
+	, TITLE_GENERATE_BASE_POS(VGet(-400, 0, 1800))
+	, TITLE_GENERATE_POS_1(VGet(0, 200, 400))
+	, TITLE_GENERATE_POS_2(VGet(0, 300, 800))
+	, TITLE_GENERATE_POS_3(VGet(0, 250, 1200))
+{
 	for (int i = 0; i < 3; i++)
 		pStartBomb[i] = nullptr;
 }
@@ -67,12 +80,14 @@ void BombManager::DestroyInstance() {
 */
 void BombManager::Start() {
 	//  モデルの読み込み
-	bombModel = MV1LoadModel("Res/Model/Bomb.mv1");
+	bombModel = MV1LoadModel(BOMB_MODEL_PATH);
 
 	//  爆弾のインスタンス化
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < START_BOMB; i++) {
 		pBomb.push_back(new Bomb(MV1DuplicateModel(bombModel)
-			, VGet(GetRand(1200.0f) - 600.0f, 2000.0f, GetRand(1000.0f) + 600.0f)));
+			, VGet(GetRand(GENERATE_RAND_X) - GENERATE_OFFSET_X, 
+				GENERATE_POS_Y, 
+				GetRand(GENERATE_RAND_Z) + GENERATE_OFFSET_Z)));
 	}
 }
 
@@ -82,10 +97,10 @@ void BombManager::Start() {
 */
 void BombManager::TitleStart() {
 	//  モデルの読み込み
-	bombModel = MV1LoadModel("Res/Model/Bomb.mv1");
+	bombModel = MV1LoadModel(BOMB_MODEL_PATH);
 
-	for (int i = 0; i < 3; i++)
-		pStartBomb[i] = new Bomb(MV1DuplicateModel(bombModel), VGet(-400, 0, 1800));
+	for (int i = 0; i < TITLE_BOMB; i++)
+		pStartBomb[i] = new Bomb(MV1DuplicateModel(bombModel), TITLE_GENERATE_BASE_POS);
 }
 
 /*
@@ -100,14 +115,12 @@ void BombManager::Update() {
 	//  時間を計測
 	Time += TimeManager::GetInstance()->GetDeltaTime();
 
-	//  30秒たったら1つ生成
-	if (Time > 15) {
-		//Bomb* bom = new Bomb(MV1DuplicateModel(bombModel)
-		//	, VGet(GetRand(1200.0f) - 600.0f, 2000.0f, GetRand(1000.0f) + 600.0f));
-		//pBomb.push_back(bom);
-		//bom->SetVisible(false);
+	//  クールタイムが明けたら1つ生成
+	if (Time > GENERATE_COOLTIME_MAX) {
 		pBomb.push_back(new Bomb(MV1DuplicateModel(bombModel)
-			, VGet(GetRand(1200.0f) - 600.0f, 2000.0f, GetRand(1000.0f) + 600.0f)));
+			, VGet(GetRand(GENERATE_RAND_X) - GENERATE_OFFSET_X,
+				GENERATE_POS_Y,
+				GetRand(GENERATE_RAND_Z) + GENERATE_OFFSET_Z)));
 		Time = 0;
 	}
 }
@@ -118,14 +131,14 @@ void BombManager::Update() {
 */
 void BombManager::TitleUpdate() {
 	if (!GameStart) {
-		pStartBomb[0]->SetPosition(VGet(0, 200, 400)); 
-		pStartBomb[1]->SetPosition(VGet(0, 300, 800)); 
-		pStartBomb[2]->SetPosition(VGet(0, 250, 1200)); 
+		pStartBomb[0]->SetPosition(TITLE_GENERATE_POS_1);
+		pStartBomb[1]->SetPosition(TITLE_GENERATE_POS_2);
+		pStartBomb[2]->SetPosition(TITLE_GENERATE_POS_3);
 		for (int i = 0; i < bombCount; i++) {
 			pStartBomb[i]->SetVisible(true);
 		}
 	}
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < TITLE_BOMB; i++)
 		pStartBomb[i]->TitleUpdate();
 }
 
