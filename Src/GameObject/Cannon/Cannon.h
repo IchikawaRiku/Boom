@@ -5,6 +5,8 @@ private:	//  メンバ変数
 	bool EffectFlag;		//  エフェクト再生のフラグ
 	bool ReleaseFlag;		//  リリースのためのフラグ
 
+	const float CANNON_MUZZLE_LENGTH;	// 大砲の銃口までの距離
+
 public:		//	コンストラクタとデストラクタ
 	/*
 	*   @brief	コンストラクタ

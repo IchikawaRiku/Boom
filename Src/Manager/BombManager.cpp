@@ -25,11 +25,6 @@ BombManager::BombManager()
 	, COOLTIME_MAX(1)
 	, TITLE_BOMB(3)
 	, START_BOMB(5)
-	, GENERATE_POS_Y(2000.0f)
-	, GENERATE_RAND_X(1200.0f)
-	, GENERATE_RAND_Z(1000.0f)
-	, GENERATE_OFFSET_X(600.0f)
-	, GENERATE_OFFSET_Z(600.0f)
 	, GENERATE_COOLTIME_MAX(15)
 	, TITLE_GENERATE_BASE_POS(VGet(-400, 0, 1800))
 	, TITLE_GENERATE_POS_1(VGet(0, 200, 400))
@@ -85,9 +80,9 @@ void BombManager::Start() {
 	//  爆弾のインスタンス化
 	for (int i = 0; i < START_BOMB; i++) {
 		pBomb.push_back(new Bomb(MV1DuplicateModel(bombModel)
-			, VGet(GetRand(GENERATE_RAND_X) - GENERATE_OFFSET_X, 
-				GENERATE_POS_Y, 
-				GetRand(GENERATE_RAND_Z) + GENERATE_OFFSET_Z)));
+			, VGet(GetRand(BOMB_GENERATE_RAND_X) - BOMB_GENERATE_OFFSET_X, 
+				BOMB_GENERATE_POS_Y, 
+				GetRand(BOMB_GENERATE_RAND_Z) + BOMB_GENERATE_OFFSET_Z)));
 	}
 }
 
@@ -118,9 +113,9 @@ void BombManager::Update() {
 	//  クールタイムが明けたら1つ生成
 	if (Time > GENERATE_COOLTIME_MAX) {
 		pBomb.push_back(new Bomb(MV1DuplicateModel(bombModel)
-			, VGet(GetRand(GENERATE_RAND_X) - GENERATE_OFFSET_X,
-				GENERATE_POS_Y,
-				GetRand(GENERATE_RAND_Z) + GENERATE_OFFSET_Z)));
+			, VGet(GetRand(BOMB_GENERATE_RAND_X) - BOMB_GENERATE_OFFSET_X,
+				BOMB_GENERATE_POS_Y,
+				GetRand(BOMB_GENERATE_RAND_Z) + BOMB_GENERATE_OFFSET_Z)));
 		Time = 0;
 	}
 }

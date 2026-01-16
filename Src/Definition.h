@@ -41,6 +41,22 @@
 // 引っ張りの最低値
 #define MOUSE_PUSH_DOWN_MIN	(-100)
 
+//  マウス感度
+#define MOUSE_SENSITIVITY	(10)
+
+// 大砲の戻ってくるときの速度
+#define CANNON_RETURN_MOVE_SPEED	(0.1f)
+
+// ボムの生成位置系
+#define BOMB_GENERATE_POS_Y		(2000.0f)	//	生成されるY座標
+#define BOMB_GENERATE_RAND_X	(1200.0f)	//  生成位置のランダム値X
+#define BOMB_GENERATE_RAND_Z	(1000.0f)	//  生成位置のランダム値Z
+#define BOMB_GENERATE_OFFSET_X	(600.0f)	//  生成位置の補正値X
+#define BOMB_GENERATE_OFFSET_Z	(600.0f)	//  生成位置の補正値Z
+
+// 弾、ボムの影のポリゴン
+#define SHADOW_POLYGON			(32)
+
 // ショットエフェクトの拡大率
 #define SHOT_EFFECT_SCALE		(2.0f)
 // 爆発エフェクトの拡大率
@@ -50,6 +66,8 @@
 
 // ニューレコードSEの音量
 #define NEW_RECORD_SE_VOLUME	(0.7f)
+// 爆発SEの音量
+#define EXPLOSION_SE_VOLUME		(0.8f)
 // スタートBGMの音量
 #define START_BGM_VOLUME		(0.7f)
 // ゲームBGMの音量
@@ -90,6 +108,9 @@
 #define START_BGM_NAME			"StartBGM"
 #define GAME_BGM_NAME			"GameBGM"
 #define OK_NAME					"OK"
+
+// タグ
+#define BOMB_TAG				"Bomb"
 
 
 //	=================================================================

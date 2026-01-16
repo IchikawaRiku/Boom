@@ -61,7 +61,6 @@ private:	//　メンバ変数
 	bool SE;
 	bool scoreRender;		//  スコア表示フラグ
 
-	const int SCORE_VISIBLE_MAX;	//　スコア最大表示数
 	const int SCORE_HOLD_MAX;		//　スコア最大保持数
 	const float SCORE_VISIBLE_COUNT;//　スコア表示カウント
 	const float SCORE_TEXT_POS_X_RATIO;	// スコアの表示位置Xの割合
@@ -86,6 +85,7 @@ public:		//　メンバ関数
 		VECTOR scorePos;
 		int amount;
 	};
+	const int SCORE_VISIBLE_MAX;	//　スコア最大表示数
 	Score score[10];
 
 	/*

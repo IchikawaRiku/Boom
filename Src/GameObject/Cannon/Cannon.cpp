@@ -10,7 +10,8 @@
 Cannon::Cannon(VECTOR _pos)
 	: GameObject(_pos)
 	, EffectFlag(false)
-	, ReleaseFlag(false) {
+	, ReleaseFlag(false) 
+	, CANNON_MUZZLE_LENGTH(150){
 	scale = VScale(scale, 0.85f);
 }
 
@@ -40,12 +41,12 @@ void Cannon::Update() {
 
 	//  Šp“x‚ð’e‚Ì•ûŒü‚É‡‚í‚¹‚é
 	if (!BMana->GetRelease() && input->IsMouseButton()) {
-		rotation = VGet((input->GetMouseMoveValueY()) / 10,
-			(input->GetMouseMoveValueX()) / 10, 0);
+		rotation = VGet((input->GetMouseMoveValueY()) / MOUSE_SENSITIVITY,
+			(input->GetMouseMoveValueX()) / MOUSE_SENSITIVITY, 0);
 	}
 	//  ’e‚ð•úo‚µ‚½ŒãŒ³‚ÌŠp“x‚É–ß‚é
 	if (!BMana->GetRelease()) {
-		rotation = VSub(rotation, VScale(rotation, 0.1f));
+		rotation = VSub(rotation, VScale(rotation, CANNON_RETURN_MOVE_SPEED));
 		ReleaseFlag = false;
 	}
 
@@ -66,8 +67,8 @@ void Cannon::Update() {
 		}
 	}
 	if (EffectFlag) {
-		EffectManager::GetInstance()->Instantiate("Shot", VScale(forward, 150), rotation);
-		AudioManager::GetInstance()->PlayOneShot("Shot", 1);
+		EffectManager::GetInstance()->Instantiate(SHOT_NAME, VScale(forward, CANNON_MUZZLE_LENGTH), rotation);
+		AudioManager::GetInstance()->PlayOneShot(SHOT_NAME, 1);
 		EffectFlag = false;
 	}
 }

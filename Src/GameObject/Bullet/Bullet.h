@@ -18,6 +18,12 @@ private:	//  メンバ変数
 	bool scoreView;					//  スコアを表示するためのフラグ
 	VECTOR PrePos[PRE_LINE];		//  弾の軌道座表
 
+	const float SINGLE_SCORE_BASE;	//　弾1つが持つスコアのボーナスの基礎値
+	const float GRAVITY_BASE;		//　重力の基礎値
+	const float GRAVITY_RATE;		//  重力加速度
+	const float BULLET_HALF_SIZE;	//  弾の半分のサイズ
+	const float SCORE_TIMER;		//  スコア表示時間
+	const float SCORE_BONUS_RATE;	//  スコアのボーナス倍率
 	const float SIM_DT = 1.0f / FPS;
 
 public:		//	コンストラクタとデストラクタ

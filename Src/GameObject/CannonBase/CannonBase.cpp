@@ -6,7 +6,7 @@
 *   @brief	コンストラクタ
 */
 CannonBase::CannonBase(VECTOR _pos)
-	: GameObject(_pos) {
+	: GameObject(_pos){
 	scale = VScale(scale, 1.7f);
 }
 
@@ -37,11 +37,11 @@ void CannonBase::Update() {
 
 	//  角度を弾の方向に合わせる
 	if (!BMana->GetRelease() && input->IsMouseButton()) {
-		rotation = VGet(0,(input->GetMouseMoveValueX()) / 10, 0);
+		rotation = VGet(0,(input->GetMouseMoveValueX()) / MOUSE_SENSITIVITY, 0);
 	}
 	//  弾を放出した後元の角度に戻る
 	if (!BMana->GetRelease()) {
-		rotation = VSub(rotation, VScale(rotation, 0.1f));
+		rotation = VSub(rotation, VScale(rotation, CANNON_RETURN_MOVE_SPEED));
 	}
 	
 	//  計算した座標、回転(オイラー角)、拡縮をモデルに反映する

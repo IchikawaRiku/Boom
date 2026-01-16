@@ -20,7 +20,13 @@ Bullet::Bullet(int _handle, VECTOR _pos)
 	, Move(false)
 	, singleScore(100)
 	, scoreTime(1)
-	, scoreView(false) {
+	, scoreView(false) 
+	, SINGLE_SCORE_BASE(100)
+	, GRAVITY_BASE(0.2f)
+	, GRAVITY_RATE(350.0f)
+	, BULLET_HALF_SIZE(70)
+	, SCORE_TIMER(2.0f)
+	, SCORE_BONUS_RATE(2){
 	for (int i = 0; i < PRE_LINE; i++) {
 		PrePos[i] = VZero;
 	}
@@ -55,9 +61,9 @@ void Bullet::Start() {
 	Move = false;
 	position = VZero;
 	rotation = VZero;
-	Gravity = 0.2f;
+	Gravity = GRAVITY_BASE;
 	moveTime = 0.0f;
-	singleScore = 100;
+	singleScore = SINGLE_SCORE_BASE;
 	scoreTime = 1;
 	scoreView = false;
 	for (int i = 0; i < PRE_LINE; i++) {
@@ -101,7 +107,7 @@ void Bullet::Update() {
 		{
 			PrePos[i] = VAdd(PrePos[i - 1], VScale(forward, speed * SIM_DT));
 			PrePos[i].y -= g * SIM_DT;
-			g += 350.0f * SIM_DT;
+			g += GRAVITY_RATE * SIM_DT;
 		}
 	}
 
@@ -109,7 +115,7 @@ void Bullet::Update() {
 	if (Move) {
 		position = VAdd(position, VScale(forward, speed * time->GetDeltaTime()));
 		position.y -= Gravity * time->GetDeltaTime();
-		Gravity += 350.0f * time->GetDeltaTime();
+		Gravity += GRAVITY_RATE * time->GetDeltaTime();
 		moveTime += time->GetDeltaTime();
 	}
 
@@ -162,20 +168,21 @@ void Bullet::Render() {
 	for (int i = 0; i < PRE_LINE - 1; i++) {
 		int moveCount = static_cast<int>(moveTime / SIM_DT);
 		//　もう弾が通ることのない部分は線を引かない
-		if (i <= moveCount || PrePos[i].y < BOTTOM - 70)
+		if (i <= moveCount || PrePos[i].y < BOTTOM - BULLET_HALF_SIZE)
 			continue;
 
 		//  弾の軌道線を描画する
 		DrawLine3D(PrePos[i], PrePos[i + 1], cyan);
 
 		//  弾の軌道線を描画する
-		DrawLine3D(VGet(PrePos[i].x, BOTTOM - 70, PrePos[i].z), VGet(PrePos[i + 1].x, BOTTOM - 70, PrePos[i + 1].z), black);
+		DrawLine3D(VGet(PrePos[i].x, BOTTOM - BULLET_HALF_SIZE, PrePos[i].z), VGet(PrePos[i + 1].x, BOTTOM - BULLET_HALF_SIZE, PrePos[i + 1].z), black);
 	}
 
 	//  影の描画
-	DrawCone3D(VGet(position.x, BOTTOM - 70, position.z),
-		VGet(position.x, BOTTOM - 70.1, position.z),
-		90 / (2100 / (2100 - (position.y + 100))), 32, black, black, TRUE);
+	DrawCone3D(VGet(position.x, BOTTOM - BULLET_HALF_SIZE, position.z),
+		VGet(position.x, BOTTOM - BULLET_HALF_SIZE + 0.1f, position.z),
+		BULLET_HALF_SIZE / ((BOMB_GENERATE_POS_Y - BOTTOM) / ((BOMB_GENERATE_POS_Y - BOTTOM) - (position.y - BOTTOM))),
+		SHADOW_POLYGON, black, black, TRUE);
 
 	//  当たり判定の更新
 	if (pCollider != nullptr)
@@ -189,40 +196,32 @@ void Bullet::Render() {
 	*/
 void Bullet::OnTriggerEnter(Collider* _pCol) {
 	//  当たった相手のタグが"Bomb"だったら
-	if (_pCol->GetGameObject()->GetTag() == "Bomb") {
+	if (_pCol->GetGameObject()->GetTag() == BOMB_TAG) {
 		//  スコア管理クラスの取得
 		ScoreManager* ScoreM = ScoreManager::GetInstance();
 		//  爆弾管理クラスの取得
 		BombManager* bomb = BombManager::GetInstance();
 		//　スコアセット
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < ScoreM->SCORE_VISIBLE_MAX; i++) {
 			//  表示されているものはスキップ
 			if (ScoreM->score[i].isVisible)
 				continue;
 
-			ScoreM->score[i] = { true, 2.0f, _pCol->GetGameObject()->GetPosition(), singleScore };
+			ScoreM->score[i] = { true, SCORE_TIMER, _pCol->GetGameObject()->GetPosition(), singleScore };
 			break;
 		}
-		//  スコア表示
-		//if (scoreView) {
-		//	DrawFormatString(ConvWorldPosToScreenPos(_pCol->GetGameObject()->GetPosition()).x, ConvWorldPosToScreenPos(position).y, red, "%d", singleScore);
-		//	scoreTime -= 0.01f;
-		//	// 一定時間たったら表示しない
-		//	if (scoreTime <= 0)
-		//		scoreView = false;
-		//}
 		//  スコア表示
 		scoreView = true;
 		//  スコア増やす
 		ScoreM->SetTotalScore(ScoreM->GetTotalScore() + singleScore);
 		//  スコアにボーナスを掛ける
-		singleScore = singleScore * 2;
+		singleScore = singleScore * SCORE_BONUS_RATE;
 
 		//  エフェクト再生
-		EffectManager::GetInstance()->Instantiate("Explosion", _pCol->GetGameObject()->GetPosition());
+		EffectManager::GetInstance()->Instantiate(EXPLOSION_NAME, _pCol->GetGameObject()->GetPosition());
 
 		//　サウンド再生
-		AudioManager::GetInstance()->PlayOneShot("Explosion", 0.8f);
+		AudioManager::GetInstance()->PlayOneShot(EXPLOSION_NAME, EXPLOSION_SE_VOLUME);
 
 		//  爆弾に当たったらカウント+1
 		bomb->SetBombCount(bomb->GetBombCount() + 1);

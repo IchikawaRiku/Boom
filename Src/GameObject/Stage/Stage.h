@@ -2,7 +2,10 @@
 #include "../GameObject.h"
 class Stage : public GameObject {
 private:	//  メンバ変数
-	int SkyModel;		
+	int SkyModel;
+	
+	const VECTOR BACK_GROUND_POS;
+	const VECTOR BACK_GROUND_ROT;
 
 public:		//	コンストラクタとデストラクタ
 	/*

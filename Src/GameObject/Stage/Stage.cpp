@@ -5,7 +5,9 @@
 *   @brief	コンストラクタ
 */
 Stage::Stage(VECTOR _pos)
-	: GameObject(_pos) {
+	: GameObject(_pos) 
+	, BACK_GROUND_POS(VGet(0, 700, 0))
+	, BACK_GROUND_ROT(VGet(0, -90, 0)){
 	scale = VScale(scale, 2.0f);
 }
 
@@ -34,8 +36,8 @@ void Stage::Update() {
 	MV1SetRotationXYZ(modelHandle, VScale(rotation, DX_PI_F / 180.0f));
 	MV1SetScale(modelHandle, scale);
 
-	MV1SetPosition(SkyModel, VGet(0,700,0));
-	MV1SetRotationXYZ(SkyModel, VScale(VGet(0, -90, 0), DX_PI_F / 180.0f));
+	MV1SetPosition(SkyModel, BACK_GROUND_POS);
+	MV1SetRotationXYZ(SkyModel, VScale(BACK_GROUND_ROT, DX_PI_F / 180.0f));
 }
 
 /*

@@ -61,7 +61,6 @@ private:	//　メンバ変数
 	const int BULLET_MAX;			//  弾の最大数
 	const float COOLTIME_MAX;			//  クールタイムの最大値
 	const float TITLE_COOLTIME_MAX;	//  タイトル用のクールタイムの最大値
-	const float MOUSE_SENSITIVITY;	//  マウス感度
 	const VECTOR COOL_TIME_EFFECT_POS;	//	クールタイムエフェクトの位置
 	
 	std::vector<Bullet*> pBullet;	//  弾の管理をする配列

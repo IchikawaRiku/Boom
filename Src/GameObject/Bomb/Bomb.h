@@ -7,6 +7,10 @@
 */
 class Bomb : public GameObject {
 private:	//  メンバ変数
+	const float SPEED_RAND;			// 落下スピードのランダム値
+	const float SPEED_OFFSET;		// 落下スピードの補正値
+	const float SHAKE_TIME;			// カメラのシェイク時間
+	const float BOMB_HALF_SIZE;		// ボムのモデルの半分のサイズ
 
 public:		//	コンストラクタとデストラクタ
 	/*

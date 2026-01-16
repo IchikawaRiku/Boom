@@ -28,7 +28,6 @@ BulletManager::BulletManager()
 	, BULLET_MAX(10)
 	, COOLTIME_MAX(0.3f)
 	, TITLE_COOLTIME_MAX(0.5f)
-	, MOUSE_SENSITIVITY(10)
 	, COOL_TIME_EFFECT_POS(VGet(0, -100, 0))
 	, Release(false)
 	, ShotBullet(nullptr){

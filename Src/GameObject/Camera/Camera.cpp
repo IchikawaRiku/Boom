@@ -9,7 +9,8 @@ Camera* Camera::main = nullptr;
 *   @brief		コンストラクタ
 */
 Camera::Camera(VECTOR _pos)
-	: GameObject(_pos) {
+	: GameObject(_pos) 
+	, SHAKE_OFFSET(VGet(100, 100, 100)){
 	rotation.x = 5;
 	speed = 10.0f;
 	Start();
@@ -132,20 +133,19 @@ void Camera::Shake(int _direction, float _time, float _power) {
 	timer = 0.0f;
 	shakeTime = _time;
 	isShaking = true;
-	shakeOffset = VGet(100, 100, 100);
 
 	//  揺らす方向に応じて揺れのパターンを変更する
 	switch (_direction) {
 	case 0://　横
-		shakePattern = VGet(shakeOffset.x, 0.0f, 0.0f);
+		shakePattern = VGet(SHAKE_OFFSET.x, 0.0f, 0.0f);
 		shakePattern = VTransform(shakePattern, MGetRotY(Deg2Rad(rotation.y)));
 		break;
 
 	case 1://　縦
-		shakePattern = VGet(0.0f, shakeOffset.y, 0.0f);;
+		shakePattern = VGet(0.0f, SHAKE_OFFSET.y, 0.0f);;
 
 	default://　両方 + 前後
-		shakePattern = shakeOffset;
+		shakePattern = SHAKE_OFFSET;
 	}
 
 	//  揺れの強さを掛ける

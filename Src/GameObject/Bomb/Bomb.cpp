@@ -12,7 +12,11 @@
 *   @brief	コンストラクタ
 */
 Bomb::Bomb(int _handle, VECTOR _pos)
-	: GameObject(_pos, "Bomb") {
+	: GameObject(_pos, BOMB_TAG) 
+	, SPEED_RAND(50.0f)
+	, SPEED_OFFSET(50.0f)
+	, SHAKE_TIME(0.5f)
+	, BOMB_HALF_SIZE(70){
 	isVisible = false;
 	scale = VScale(scale, 0.7f);
 	//  弾のモデルデータのセット
@@ -37,11 +41,12 @@ Bomb::~Bomb() {
 *   @brief		初期化処理
 */
 void Bomb::Start() {
-	speed = GetRand(50) + 50.0f;
-	position = VGet(GetRand(1200.0f) - 600.0f, 2000.0f, GetRand(1000.0f) + 600.0f);
-	//EffectManager::GetInstance()->Instantiate("Fire", position);
+	speed = GetRand(SPEED_RAND) + SPEED_OFFSET;
+	position = VGet(GetRand(BOMB_GENERATE_RAND_X) - BOMB_GENERATE_OFFSET_X,
+		BOMB_GENERATE_POS_Y,
+		GetRand(BOMB_GENERATE_RAND_Z) + BOMB_GENERATE_OFFSET_Z);
 	if (SceneManager::GetInstance()->GetTitleFlag())
-		position = VGet(0, 2000.0f, 0);
+		position = VGet(0, BOMB_GENERATE_POS_Y, 0);
 
 }
 
@@ -66,21 +71,21 @@ void Bomb::Update() {
 
 	//  地面に着いたらHPを減らしてリセット,HPが0ならゲームオーバー
 	if (position.y <= BOTTOM) {
-		EffectManager::GetInstance()->Instantiate("Explosion", position);
+		EffectManager::GetInstance()->Instantiate(EXPLOSION_NAME, position);
 		game->SetHP(game->GetHP() - 1);
 		if (game->GetHP() <= 0) {
 			isVisible = false;
-			AudioManager::GetInstance()->Stop("GameBGM");
+			AudioManager::GetInstance()->Stop(GAME_BGM_NAME);
 			if (!game->GetGameOverFlag()) {
-				AudioManager::GetInstance()->PlayOneShot("GameOver", 1);
-				Camera::main->Shake(0, 0.5f);
+				AudioManager::GetInstance()->PlayOneShot(GAME_OVER_NAME, 1);
+				Camera::main->Shake(0, SHAKE_TIME);
 			}
 			game->SetGameOverFlag(true);
 		}
 		else {
-			AudioManager::GetInstance()->PlayOneShot("Explosion", 1);
+			AudioManager::GetInstance()->PlayOneShot(EXPLOSION_NAME, 1);
 			Bomb::Start();
-			Camera::main->Shake(0, 0.5f);
+			Camera::main->Shake(0, SHAKE_TIME);
 		}
 	}
 
@@ -112,10 +117,11 @@ void Bomb::Render() {
 	//  モデルの描画
 	MV1DrawModel(modelHandle);
 
-	//  影の描画
-	DrawCone3D(VGet(position.x, BOTTOM - 70, position.z),
-		VGet(position.x, BOTTOM - 70.1, position.z),
-		70 / (2100 / (2100 - (position.y + 100))), 32, black, black, TRUE);
+	//  影の描画(平べったい円錐を陰にする)
+	DrawCone3D(VGet(position.x, BOTTOM - BOMB_HALF_SIZE, position.z),
+		VGet(position.x, BOTTOM - BOMB_HALF_SIZE + 0.1f, position.z),
+		BOMB_HALF_SIZE / ((BOMB_GENERATE_POS_Y - BOTTOM) / ((BOMB_GENERATE_POS_Y - BOTTOM) - (position.y - BOTTOM))),
+		SHADOW_POLYGON, black, black, TRUE);
 
 	//  当たり判定の更新
 	if (pCollider != nullptr)

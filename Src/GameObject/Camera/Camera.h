@@ -7,11 +7,12 @@
 */
 class Camera : public GameObject {
 private:	//  メンバ変数
-	VECTOR shakeOffset;			//  揺れ調整用
 	VECTOR shakePattern;		//  実際の揺れ
 	float timer;				//  時間計測用
 	float shakeTime;			//  揺れ時間
 	bool isShaking;				//　揺れ中かどうか
+
+	const VECTOR SHAKE_OFFSET;	//　揺れの調整用
 
 public:		//  静的メンバ変数
 	static Camera* main;
